@@ -1,0 +1,34 @@
+# Binaries
+/gity
+gity.exe
+*.exe
+*.out
+*.test
+
+# Go build
+/bin/
+/dist/
+vendor/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Backup / temp
+*.bak
+*.tmp
+*.orig
+
+# Claude / tooling state
+.claude/settings.local.json
+.lucen/
+
+# Local config
+.env
+.env.local
+config.local.json
