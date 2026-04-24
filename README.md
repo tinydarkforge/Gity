@@ -1,8 +1,18 @@
 # gity
 
+[![CI](https://github.com/tinydarkforge/Gity/actions/workflows/ci.yml/badge.svg)](https://github.com/tinydarkforge/Gity/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/tinydarkforge/Gity)](https://github.com/tinydarkforge/Gity/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tinydarkforge/gity)](https://goreportcard.com/report/github.com/tinydarkforge/gity)
+
 Agentic GitHub issue creator powered by Ollama. Paste anything — a Slack message, an error log, meeting notes — and gity drafts a structured GitHub issue using a local AI model.
 
 Built with [Bubble Tea](https://github.com/charmbracelet/bubbletea) + [Lipgloss](https://github.com/charmbracelet/lipgloss).
+
+![gity demo](docs/demo.gif)
+
+<details>
+<summary>ASCII preview (if gif doesn't load)</summary>
 
 ```
 ╔════════════[ ~/code/myproject ]═════╦════════════[ Issues (open) — 12 ]══╗
@@ -16,6 +26,8 @@ Built with [Bubble Tea](https://github.com/charmbracelet/bubbletea) + [Lipgloss]
 ╚═════════════════════════════════════╩══════════════════════════════════════╝
   ↑/↓ nav   enter open   o toggle   r refresh   tab switch   c create   s settings   q quit
 ```
+
+</details>
 
 ---
 
