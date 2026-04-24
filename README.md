@@ -1,17 +1,17 @@
 <!-- markdownlint-disable MD033 MD041 -->
 
 ```text
-    ╔═══════╗        █████   █████   █████   █   █
-    ║ ╔═══╗ ║        █         █       █     █   █
-    ║ ║▌ ▐║ ║        █ ███     █       █      █ █ 
-    ║ ╚═══╝ ║        █   █     █       █       █  
-    ╠═══════╣        █████   █████     █       █  
-    ║ ≡ ◎  ║
-╔═══╬═══════╬═══╗    ━━━━━━━━━━━━━ ISSUE FORGE ━━━━━━━━━━━━━
-║   ║ [gh↑] ║   ║    Ollama · GitHub CLI · Bubble Tea
-╚═══╬═══════╬═══╝    paste anything → structured issue,
-    ║ ║   ║ ║        one command. MIT · local AI · no cloud.
-    ╚═╝   ╚═╝
+    ╔═════╗ ╔═════╗      █████   █████   █████   █   █
+    ║ ./  ║ ║ #42 ║      █         █       █     █   █
+    ╠═════╩═╩═════╣      █ ███     █       █      █ █ 
+    ║  → paste →  ║      █   █     █       █       █  
+    ║    → ◈ →    ║      █████   █████     █       █  
+    ╠═════════════╣
+╔═══╩═════════════╩═══╗  ━━━━━━━━━━━━━ ISSUE FORGE ━━━━━━━━━━━━━
+║    [  ctrl+s  ]     ║  Ollama · GitHub CLI · Bubble Tea
+╚═════════════════════╝  paste anything → structured issue,
+         │███│           one command. MIT · local AI · no cloud.
+   ═══════════════
 ```
 
 <p align="center">
