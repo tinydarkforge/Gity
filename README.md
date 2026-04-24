@@ -1,67 +1,127 @@
-# gity
+<!-- markdownlint-disable MD033 MD041 -->
 
-[![CI](https://github.com/tinydarkforge/Gity/actions/workflows/ci.yml/badge.svg)](https://github.com/tinydarkforge/Gity/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/tinydarkforge/Gity)](https://github.com/tinydarkforge/Gity/releases/latest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/tinydarkforge/gity)](https://goreportcard.com/report/github.com/tinydarkforge/gity)
-
-Agentic GitHub issue creator powered by Ollama. Paste anything — a Slack message, an error log, meeting notes — and gity drafts a structured GitHub issue using a local AI model.
-
-Built with [Bubble Tea](https://github.com/charmbracelet/bubbletea) + [Lipgloss](https://github.com/charmbracelet/lipgloss).
-
-![gity demo](docs/demo.gif)
-
-<details>
-<summary>ASCII preview (if gif doesn't load)</summary>
-
-```
-╔════════════[ ~/code/myproject ]═════╦════════════[ Issues (open) — 12 ]══╗
-║ ../ ◂dir                            ║▶#4617  BE: Beta client rollout  BE  ║
-║ .github/                            ║ #4616  QA: Production monitoring QA  ║
-║ app/                                ║ #4593  Epic: Quote → Project    epic ║
-║ services/                           ║ #4582  FE: Dark mode toggle          ║
-║ ui/                                 ║ #4571  BE: Auth timeout fix          ║
-║ go.mod                       1.2K  ║ #4560  QA: Mobile perf regression    ║
-║ main.go                      3.4K  ║                                      ║
-╚═════════════════════════════════════╩══════════════════════════════════════╝
-  ↑/↓ nav   enter open   o toggle   r refresh   tab switch   c create   s settings   q quit
+```text
+    ╔═══════╗        █████   █████   █████   █   █
+    ║ ╔═══╗ ║        █         █       █     █   █
+    ║ ║▌ ▐║ ║        █ ███     █       █      █ █ 
+    ║ ╚═══╝ ║        █   █     █       █       █  
+    ╠═══════╣        █████   █████     █       █  
+    ║ ≡ ◎  ║
+╔═══╬═══════╬═══╗    ━━━━━━━━━━━━━ ISSUE FORGE ━━━━━━━━━━━━━
+║   ║ [gh↑] ║   ║    Ollama · GitHub CLI · Bubble Tea
+╚═══╬═══════╬═══╝    paste anything → structured issue,
+    ║ ║   ║ ║        one command. MIT · local AI · no cloud.
+    ╚═╝   ╚═╝
 ```
 
-</details>
+<p align="center">
+  <a href="https://github.com/tinydarkforge/Gity/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/tinydarkforge/Gity/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/tinydarkforge/Gity/releases/latest"><img alt="release" src="https://img.shields.io/github/v/release/tinydarkforge/Gity?style=flat-square&labelColor=0a0a0a&color=00cc66"></a>
+  <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-00cc66.svg?style=flat-square&labelColor=0a0a0a"></a>
+  <img alt="go" src="https://img.shields.io/badge/go-1.26%2B-00cc66.svg?style=flat-square&labelColor=0a0a0a">
+  <a href="https://goreportcard.com/report/github.com/tinydarkforge/gity"><img alt="go report" src="https://goreportcard.com/badge/github.com/tinydarkforge/gity"></a>
+  <a href="SECURITY.md"><img alt="security" src="https://img.shields.io/badge/security-policy-00cc66.svg?style=flat-square&labelColor=0a0a0a"></a>
+</p>
+
+> **gity** is a terminal UI for GitHub issues powered by a local AI agent. Paste anything — a Slack message, an error log, meeting notes, a stack trace — and gity drafts a structured GitHub issue using a local Ollama model. No cloud. No account. No telemetry.
+
+> **Status:** Early release (`v0.1.0`). MIT-licensed. macOS and Linux. Report vulnerabilities via [SECURITY.md](SECURITY.md).
 
 ---
 
-## Requirements
+## ░▒▓█ TL;DR
+
+```bash
+gity
+```
+
+Two-pane TUI: browse your filesystem left, manage GitHub issues right. Press `c` to create an issue — paste anything, the AI agent handles the rest.
+
+---
+
+## ░▒▓█ What it does today
+
+gity wraps two things: a **Norton Commander-style filesystem + issues browser** and an **agentic issue drafter** powered by Ollama.
+
+- **Two-pane layout** — local filesystem left, GitHub issues right
+- **Agentic issue creation** — paste raw context; agent asks 1–3 questions if needed, then drafts from your template
+- **Template-aware** — reads `.github/ISSUE_TEMPLATES/*.md` frontmatter; auto-applies labels on create
+- **Full issue CRUD** — create, edit title+body, comment, assign yourself, close, reopen
+- **Streaming drafts** — token-by-token output while the model thinks
+- **No cloud dependency** — Ollama runs locally; `gh` handles GitHub auth
+
+gity does not ship its own AI model. Every draft originates from whatever Ollama model you choose.
+
+---
+
+## ░▒▓█ Positioning
+
+gity is **not** a project management tool, a GitHub web app replacement, or a SaaS product. It is a **local TUI gate** for the create-and-triage loop: go from messy context to a structured GitHub issue without leaving the terminal.
+
+| Alternative | When to pick it instead of gity |
+|-------------|----------------------------------|
+| **GitHub web UI** | You prefer a browser, or need labels/milestones/projects UI |
+| **`gh issue create`** | You already have a clean title and body |
+| **Linear / Jira** | You need a managed tracker with workflows, not raw GitHub issues |
+
+**gity's niche:** local AI, no account, no telemetry, instant context-to-issue from the terminal.
+
+---
+
+## ░▒▓█ Requirements
 
 | Tool | Purpose | Min version |
 |------|---------|-------------|
 | [Ollama](https://ollama.ai) | Runs the AI model locally | 0.1.x |
 | [GitHub CLI (`gh`)](https://cli.github.com) | Creates / lists issues | 2.x |
-| [Go](https://go.dev/dl/) | Build from source | 1.21+ |
+| [Go](https://go.dev/dl/) | Build from source only | 1.26+ |
+
+**Platforms:** macOS (Intel + Apple Silicon), Linux (x86\_64 + arm64). Pre-built binaries on the [releases page](https://github.com/tinydarkforge/Gity/releases/latest). No Windows binary — build from source if needed.
 
 ---
 
-## Install
+## ░▒▓█ Install
 
-Follow the steps below to install each dependency, then build `gity`.
+### Pre-built binary (recommended)
+
+Grab the tarball for your platform from the [latest release](https://github.com/tinydarkforge/Gity/releases/latest), extract, and move the binary onto your `$PATH`:
+
+```bash
+# example — macOS Apple Silicon
+tar xz gity < gity_*_macos_arm64.tar.gz
+mv gity /usr/local/bin/
+```
+
+Builds are provided for `macos_arm64`, `macos_x86_64`, `linux_arm64`, and `linux_x86_64`.
+
+### go install
+
+```bash
+go install github.com/tinydarkforge/gity@latest
+```
+
+### Build from source
+
+```bash
+git clone https://github.com/tinydarkforge/gity.git
+cd gity
+go build -o gity .
+mv gity /usr/local/bin/
+```
 
 ---
 
-## 1 — Install Ollama
+## ░▒▓█ Dependencies
+
+### Ollama
 
 **macOS / Linux:**
 ```bash
 curl -fsSL https://ollama.ai/install.sh | sh
+# or: brew install ollama
 ```
 
-**macOS (Homebrew):**
-```bash
-brew install ollama
-```
-
-**Windows:** download the installer from [ollama.ai](https://ollama.ai).
-
-Start the daemon (runs in the background):
+Start the daemon:
 ```bash
 ollama serve
 ```
@@ -71,21 +131,16 @@ Pull the default model:
 ollama pull llama3
 ```
 
-> Other models work too — `mistral`, `llama3.1`, `gemma2`, etc. You can change the model later in the Settings screen.
+> Other models work — `mistral`, `llama3.1`, `gemma2`. Change the model in the Settings screen.
 
-Verify it's running:
+Verify:
 ```bash
 curl http://localhost:11434/api/tags
 ```
 
----
+### GitHub CLI
 
-## 2 — Install GitHub CLI
-
-**macOS:**
-```bash
-brew install gh
-```
+**macOS:** `brew install gh`
 
 **Linux (Debian/Ubuntu):**
 ```bash
@@ -98,90 +153,48 @@ brew install gh
   && sudo apt update && sudo apt install gh -y
 ```
 
-**Windows:** `winget install --id GitHub.cli`
-
 Authenticate:
 ```bash
 gh auth login
 ```
 
-Follow the prompts — select GitHub.com → HTTPS → Login with a web browser.
-
-Verify:
-```bash
-gh auth status
-```
-
 ---
 
-## 3 — Install Go
-
-**macOS:**
-```bash
-brew install go
-```
-
-**Linux / Windows:** download from [go.dev/dl](https://go.dev/dl/) and follow the installer.
-
-Verify:
-```bash
-go version   # should print go1.21 or higher
-```
-
----
-
-## 4 — Install gity
-
-Clone and build:
-```bash
-git clone https://github.com/tinydarkforge/gity.git
-cd gity
-go build -o gity .
-```
-
-Optionally move the binary somewhere on your PATH:
-```bash
-mv gity /usr/local/bin/gity       # macOS / Linux
-# or on macOS:
-mv gity /opt/homebrew/bin/gity
-```
-
----
-
-## 5 — Configure
+## ░▒▓█ Configure
 
 ### Option A — Settings screen (recommended)
 
-Run `gity`, press `s` to open Settings, fill in your repo and model, press `ctrl+s` to save.
+Run `gity`, press `s`, fill in repo and model, press `ctrl+s` to save.
 
-Config is stored at `~/.config/gity/config.json`.
+Config is stored at `~/.config/gity/config.json` (or `$GITY_CONFIG`).
 
 ### Option B — Environment variables
 
 ```bash
-export GITY_REPO="owner/repo"          # e.g. acme/backend
-export GITY_MODEL="llama3"             # any model you have pulled
+export GITY_REPO="owner/repo"
+export GITY_MODEL="llama3"
 export OLLAMA_HOST="http://localhost:11434"
-export GITY_TIMEOUT=120               # seconds before ollama call times out
-export GITY_MAX_TURNS=6               # max Q&A rounds before forcing a draft
+export GITY_TIMEOUT=120
+export GITY_MAX_TURNS=6
 export GITY_TEMPLATE_DIR=".github/ISSUE_TEMPLATES"
-export GITY_DEBUG=1                   # dump raw model output to stderr
+export GITY_DEBUG=1
 ```
 
 ### Option C — CLI flags
 
 ```bash
 gity -repo owner/repo -model mistral -ollama-host http://192.168.1.10:11434
+gity -no-sound -debug
 ```
 
 Flags override env vars, which override the config file.
 
 ---
 
-## 6 — Run
+## ░▒▓█ Run
 
 ```bash
-# make sure ollama is running first
+# make sure Ollama is running first
 ollama serve &
 
 gity
@@ -191,18 +204,18 @@ gity -repo owner/repo
 
 ---
 
-## Usage
+## ░▒▓█ Usage
 
 ### Main view — Norton Commander layout
 
-gity opens in a two-pane layout inspired by Norton Commander:
+gity opens in a two-pane layout:
 
-- **Left pane** — local filesystem browser, rooted at your current directory
+- **Left pane** — local filesystem browser, rooted at your working directory
 - **Right pane** — GitHub issues list for your configured repo
 
-Press `Tab` to switch between panes. The active pane has a brighter border and title.
+Press `Tab` to switch panes. The active pane has a brighter border and title.
 
-#### Global keys (always available)
+#### Global keys
 
 | Key | Action |
 |-----|--------|
@@ -219,7 +232,7 @@ Press `Tab` to switch between panes. The active pane has a brighter border and t
 |-----|--------|
 | `↑` / `k` | move up |
 | `↓` / `j` | move down |
-| `enter` | enter directory (or `..` to go up) |
+| `enter` | enter directory |
 
 #### Right pane — issues list
 
@@ -228,14 +241,8 @@ Press `Tab` to switch between panes. The active pane has a brighter border and t
 | `↑` / `k` | move up |
 | `↓` / `j` | move down |
 | `enter` | open issue detail |
-| `o` | toggle open / closed issues |
+| `o` | toggle open / closed |
 | `r` | refresh list |
-
-#### Shortcut bar
-
-The bottom bar shows context-sensitive shortcuts for the current screen. In the main view:
-
-`↑/↓` nav  `enter` open  `o` toggle open/closed  `r` refresh  `tab` switch pane  `c` create  `s` settings  `q` quit
 
 ---
 
@@ -243,20 +250,20 @@ The bottom bar shows context-sensitive shortcuts for the current screen. In the 
 
 **Step 1 — Choose template**
 
-Pick from your `.github/ISSUE_TEMPLATES` with `j/k`, confirm with `enter`.
+Pick from `.github/ISSUE_TEMPLATES` with `j/k`, confirm with `enter`.
 
 **Step 2 — Title** *(optional)*
 
-Type a short title, or leave blank — the agent will infer one from your context.
+Type a short title, or leave blank — the agent infers one from your context.
 
 **Step 3 — Context (paste anything)**
 
 This is the power step. Paste whatever you have:
 
-- A Slack message: *"hey the login redirect is broken on staging, users get 403 after SSO"*
+- A Slack message: *"login redirect broken on staging, users get 403 after SSO"*
 - An error log or stack trace
 - A PR description you want converted to a task
-- Rough meeting notes: *"discussed: need dark mode, auth timeout issue, mobile perf"*
+- Meeting notes: *"discussed: dark mode, auth timeout issue, mobile perf"*
 - A one-liner: *"fix the thing that breaks when you click save twice"*
 
 Press `ctrl+s` when ready.
@@ -265,44 +272,32 @@ Press `ctrl+s` when ready.
 
 **Step 4 — Agent Q&A** *(short pastes only)*
 
-For brief inputs the agent may ask 1–3 clarifying questions. Type your answer and press `enter`. Type `skip` to force an immediate draft with whatever info is available.
+For brief inputs the agent may ask 1–3 clarifying questions. Answer and press `enter`. Type `skip` to force an immediate draft.
 
 **Step 5 — Preview**
-
-Review the generated title and body.
 
 | Key | Action |
 |-----|--------|
 | `y` | create the GitHub issue |
-| `r` | regenerate (asks agent to try again) |
-| `esc` | cancel and start over |
+| `r` | regenerate |
+| `esc` | cancel |
 
 ---
 
-### Issue detail (`enter` from list)
+### Issue detail (`enter`)
 
 | Key | Action |
 |-----|--------|
 | `↑` / `k` | scroll up |
 | `↓` / `j` | scroll down |
-| `e` | **edit title and body** |
+| `e` | edit title and body |
 | `c` | add a comment |
 | `a` | assign yourself |
 | `x` | close issue |
 | `o` | reopen issue |
 | `esc` | back to list |
 
-**Editing an issue**
-
-Press `e` to open the edit view. The current title and body are pre-filled.
-
-| Key | Action |
-|-----|--------|
-| `tab` | switch between title and body fields |
-| `ctrl+s` | save changes to GitHub |
-| `esc` | cancel, back to read view |
-
-Changes are saved with `gh issue edit` and the issue reloads automatically.
+**Editing:** press `e`, use `tab` to switch between title and body, `ctrl+s` to save. Changes are applied with `gh issue edit` and the issue reloads automatically.
 
 ---
 
@@ -314,15 +309,15 @@ Changes are saved with `gh issue edit` and the issue reloads automatically.
 | Ollama Model | any model you have pulled (`llama3`, `mistral`, `gemma2`…) |
 | Ollama Host | default `http://localhost:11434` — change for remote Ollama |
 | Timeout (sec) | how long to wait for the model before giving up |
-| Max Turns | maximum Q&A rounds (default 6) |
-| Sound | `true` / `false` — audio feedback on macOS/Linux |
-| Debug | `true` dumps raw model output to stderr |
+| Max Turns | max Q&A rounds (default 6) |
+| Sound | audio feedback on macOS/Linux |
+| Debug | dumps raw model output to stderr |
 
-Navigate fields with `tab` / `shift+tab`, edit inline, press `ctrl+s` to save.
+Navigate with `tab` / `shift+tab`, press `ctrl+s` to save.
 
 ---
 
-## Issue templates
+## ░▒▓█ Issue templates
 
 gity reads templates from `.github/ISSUE_TEMPLATES/*.md`. Each file needs YAML frontmatter:
 
@@ -339,11 +334,11 @@ assignees: []
 ...
 ```
 
-The `labels` array is automatically applied when the issue is created. Any repo already using GitHub issue templates works out of the box.
+Labels are auto-applied on create. Any repo already using GitHub issue templates works out of the box.
 
 ---
 
-## Troubleshooting
+## ░▒▓█ Troubleshooting
 
 **`ollama is not running — start it with: ollama serve`**
 ```bash
@@ -351,20 +346,20 @@ ollama serve
 ```
 
 **`gh: command not found`**
-Install the GitHub CLI (step 2 above) and run `gh auth login`.
+Install the GitHub CLI (above) and run `gh auth login`.
 
 **Model produces garbled JSON**
-Try a larger model: `ollama pull llama3.1` then set it in Settings. Smaller models (< 7B) sometimes struggle with strict JSON output.
+Try a larger model: `ollama pull llama3.1`, then set it in Settings. Small models (< 7B) sometimes struggle with strict JSON output.
 
 **Templates not showing**
-Make sure `GITY_TEMPLATE_DIR` points to a directory containing `*.md` files with YAML frontmatter. Default is `.github/ISSUE_TEMPLATES` relative to where you run gity.
+Ensure `GITY_TEMPLATE_DIR` points to a directory with `*.md` files that have YAML frontmatter. Default is `.github/ISSUE_TEMPLATES` relative to where you run gity.
 
 **Sound not working on Linux**
 Install `pulseaudio-utils` (`paplay`) or `alsa-utils` (`aplay`). Or toggle Sound off in Settings.
 
 ---
 
-## Environment variable reference
+## ░▒▓█ Env reference
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -375,5 +370,5 @@ Install `pulseaudio-utils` (`paplay`) or `alsa-utils` (`aplay`). Or toggle Sound
 | `GITY_MAX_TURNS` | `6` | Max agent Q&A rounds |
 | `GITY_TEMPLATE_DIR` | `.github/ISSUE_TEMPLATES` | Template directory |
 | `GITY_DEBUG` | *(unset)* | Set to `1` to log raw model output |
-| `NO_COLOR` | *(unset)* | Set to any value to disable ANSI colors |
+| `NO_COLOR` | *(unset)* | Disable ANSI colors |
 | `GITY_CONFIG` | `~/.config/gity/config.json` | Override config file path |
