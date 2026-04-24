@@ -1,0 +1,70 @@
+version: 2
+
+project_name: gity
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: gity
+    main: .
+    binary: gity
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.Commit}}
+      - -X main.date={{.Date}}
+
+archives:
+  - id: gity
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_
+      {{- if eq .Os "darwin" }}macos{{ else }}{{ .Os }}{{ end }}_
+      {{- if eq .Arch "amd64" }}x86_64{{ else }}{{ .Arch }}{{ end }}
+    formats: [tar.gz]
+    files:
+      - LICENSE
+      - README.md
+      - CHANGELOG.md
+
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha256
+
+snapshot:
+  version_template: '{{ incpatch .Version }}-next'
+
+changelog:
+  use: github
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - '^ci:'
+      - Merge pull request
+      - Merge branch
+
+release:
+  github:
+    owner: tinydarkforge
+    name: Gity
+  draft: false
+  prerelease: auto
+  mode: replace
+  header: |
+    ## gity {{ .Tag }}
+
+    See [CHANGELOG.md](https://github.com/tinydarkforge/Gity/blob/main/CHANGELOG.md) for full notes.
