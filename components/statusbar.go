@@ -1,7 +1,7 @@
 package components
 
 import (
-	"github.com/tinydarkforge/gity/app"
+	"github.com/tinydarkforge/intake/app"
 )
 
 // StatusBar renders a transient status line (success, error, or empty).

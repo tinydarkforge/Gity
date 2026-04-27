@@ -14,15 +14,15 @@
 ```
 
 <p align="center">
-  <a href="https://github.com/tinydarkforge/Gity/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/tinydarkforge/Gity/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://github.com/tinydarkforge/Gity/releases/latest"><img alt="release" src="https://img.shields.io/github/v/release/tinydarkforge/Gity?style=flat-square&labelColor=0a0a0a&color=00cc66"></a>
+  <a href="https://github.com/tinydarkforge/Intake/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/tinydarkforge/Intake/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/tinydarkforge/Intake/releases/latest"><img alt="release" src="https://img.shields.io/github/v/release/tinydarkforge/Intake?style=flat-square&labelColor=0a0a0a&color=00cc66"></a>
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-MIT-00cc66.svg?style=flat-square&labelColor=0a0a0a"></a>
   <img alt="go" src="https://img.shields.io/badge/go-1.26%2B-00cc66.svg?style=flat-square&labelColor=0a0a0a">
-  <a href="https://goreportcard.com/report/github.com/tinydarkforge/gity"><img alt="go report" src="https://goreportcard.com/badge/github.com/tinydarkforge/gity"></a>
+  <a href="https://goreportcard.com/report/github.com/tinydarkforge/intake"><img alt="go report" src="https://goreportcard.com/badge/github.com/tinydarkforge/intake"></a>
   <a href="SECURITY.md"><img alt="security" src="https://img.shields.io/badge/security-policy-00cc66.svg?style=flat-square&labelColor=0a0a0a"></a>
 </p>
 
-> **gity** is a terminal UI for GitHub issues powered by a local AI agent. Paste anything — a Slack message, an error log, meeting notes, a stack trace — and gity drafts a structured GitHub issue using a local Ollama model. No cloud. No account. No telemetry.
+> **intake** is a terminal UI for GitHub issues powered by a local AI agent. Paste anything — a Slack message, an error log, meeting notes, a stack trace — and intake drafts a structured GitHub issue using a local Ollama model. No cloud. No account. No telemetry.
 
 > **Status:** Early release (`v0.1.0`). MIT-licensed. macOS and Linux. Report vulnerabilities via [SECURITY.md](SECURITY.md).
 
@@ -31,7 +31,7 @@
 ## ░▒▓█ TL;DR
 
 ```bash
-gity
+intake
 ```
 
 Two-pane TUI: browse your filesystem left, manage GitHub issues right. Press `c` to create an issue — paste anything, the AI agent handles the rest.
@@ -40,7 +40,7 @@ Two-pane TUI: browse your filesystem left, manage GitHub issues right. Press `c`
 
 ## ░▒▓█ What it does today
 
-gity wraps two things: a **Norton Commander-style filesystem + issues browser** and an **agentic issue drafter** powered by Ollama.
+intake wraps two things: a **Norton Commander-style filesystem + issues browser** and an **agentic issue drafter** powered by Ollama.
 
 - **Two-pane layout** — local filesystem left, GitHub issues right
 - **Agentic issue creation** — paste raw context; agent asks 1–3 questions if needed, then drafts from your template
@@ -49,21 +49,21 @@ gity wraps two things: a **Norton Commander-style filesystem + issues browser** 
 - **Streaming drafts** — token-by-token output while the model thinks
 - **No cloud dependency** — Ollama runs locally; `gh` handles GitHub auth
 
-gity does not ship its own AI model. Every draft originates from whatever Ollama model you choose.
+intake does not ship its own AI model. Every draft originates from whatever Ollama model you choose.
 
 ---
 
 ## ░▒▓█ Positioning
 
-gity is **not** a project management tool, a GitHub web app replacement, or a SaaS product. It is a **local TUI gate** for the create-and-triage loop: go from messy context to a structured GitHub issue without leaving the terminal.
+intake is **not** a project management tool, a GitHub web app replacement, or a SaaS product. It is a **local TUI gate** for the create-and-triage loop: go from messy context to a structured GitHub issue without leaving the terminal.
 
-| Alternative | When to pick it instead of gity |
+| Alternative | When to pick it instead of intake |
 |-------------|----------------------------------|
 | **GitHub web UI** | You prefer a browser, or need labels/milestones/projects UI |
 | **`gh issue create`** | You already have a clean title and body |
 | **Linear / Jira** | You need a managed tracker with workflows, not raw GitHub issues |
 
-**gity's niche:** local AI, no account, no telemetry, instant context-to-issue from the terminal.
+**intake's niche:** local AI, no account, no telemetry, instant context-to-issue from the terminal.
 
 ---
 
@@ -75,7 +75,7 @@ gity is **not** a project management tool, a GitHub web app replacement, or a Sa
 | [GitHub CLI (`gh`)](https://cli.github.com) | Creates / lists issues | 2.x |
 | [Go](https://go.dev/dl/) | Build from source only | 1.26+ |
 
-**Platforms:** macOS (Intel + Apple Silicon), Linux (x86\_64 + arm64). Pre-built binaries on the [releases page](https://github.com/tinydarkforge/Gity/releases/latest). No Windows binary — build from source if needed.
+**Platforms:** macOS (Intel + Apple Silicon), Linux (x86\_64 + arm64). Pre-built binaries on the [releases page](https://github.com/tinydarkforge/Intake/releases/latest). No Windows binary — build from source if needed.
 
 ---
 
@@ -83,12 +83,12 @@ gity is **not** a project management tool, a GitHub web app replacement, or a Sa
 
 ### Pre-built binary (recommended)
 
-Grab the tarball for your platform from the [latest release](https://github.com/tinydarkforge/Gity/releases/latest), extract, and move the binary onto your `$PATH`:
+Grab the tarball for your platform from the [latest release](https://github.com/tinydarkforge/Intake/releases/latest), extract, and move the binary onto your `$PATH`:
 
 ```bash
 # example — macOS Apple Silicon
-tar xz gity < gity_*_macos_arm64.tar.gz
-mv gity /usr/local/bin/
+tar xz intake < intake_*_macos_arm64.tar.gz
+mv intake /usr/local/bin/
 ```
 
 Builds are provided for `macos_arm64`, `macos_x86_64`, `linux_arm64`, and `linux_x86_64`.
@@ -96,16 +96,16 @@ Builds are provided for `macos_arm64`, `macos_x86_64`, `linux_arm64`, and `linux
 ### go install
 
 ```bash
-go install github.com/tinydarkforge/gity@latest
+go install github.com/tinydarkforge/intake@latest
 ```
 
 ### Build from source
 
 ```bash
-git clone https://github.com/tinydarkforge/gity.git
-cd gity
-go build -o gity .
-mv gity /usr/local/bin/
+git clone https://github.com/tinydarkforge/intake.git
+cd intake
+go build -o intake .
+mv intake /usr/local/bin/
 ```
 
 ---
@@ -163,27 +163,27 @@ gh auth login
 
 ### Option A — Settings screen (recommended)
 
-Run `gity`, press `s`, fill in repo and model, press `ctrl+s` to save.
+Run `intake`, press `s`, fill in repo and model, press `ctrl+s` to save.
 
-Config is stored at `~/.config/gity/config.json` (or `$GITY_CONFIG`).
+Config is stored at `~/.config/intake/config.json` (or `$INTAKE_CONFIG`).
 
 ### Option B — Environment variables
 
 ```bash
-export GITY_REPO="owner/repo"
-export GITY_MODEL="llama3"
+export INTAKE_REPO="owner/repo"
+export INTAKE_MODEL="llama3"
 export OLLAMA_HOST="http://localhost:11434"
-export GITY_TIMEOUT=120
-export GITY_MAX_TURNS=6
-export GITY_TEMPLATE_DIR=".github/ISSUE_TEMPLATES"
-export GITY_DEBUG=1
+export INTAKE_TIMEOUT=120
+export INTAKE_MAX_TURNS=6
+export INTAKE_TEMPLATE_DIR=".github/ISSUE_TEMPLATES"
+export INTAKE_DEBUG=1
 ```
 
 ### Option C — CLI flags
 
 ```bash
-gity -repo owner/repo -model mistral -ollama-host http://192.168.1.10:11434
-gity -no-sound -debug
+intake -repo owner/repo -model mistral -ollama-host http://192.168.1.10:11434
+intake -no-sound -debug
 ```
 
 Flags override env vars, which override the config file.
@@ -196,9 +196,9 @@ Flags override env vars, which override the config file.
 # make sure Ollama is running first
 ollama serve &
 
-gity
+intake
 # or with explicit repo
-gity -repo owner/repo
+intake -repo owner/repo
 ```
 
 ---
@@ -207,7 +207,7 @@ gity -repo owner/repo
 
 ### Main view — Norton Commander layout
 
-gity opens in a two-pane layout:
+intake opens in a two-pane layout:
 
 - **Left pane** — local filesystem browser, rooted at your working directory
 - **Right pane** — GitHub issues list for your configured repo
@@ -318,7 +318,7 @@ Navigate with `tab` / `shift+tab`, press `ctrl+s` to save.
 
 ## ░▒▓█ Issue templates
 
-gity reads templates from `.github/ISSUE_TEMPLATES/*.md`. Each file needs YAML frontmatter:
+intake reads templates from `.github/ISSUE_TEMPLATES/*.md`. Each file needs YAML frontmatter:
 
 ```markdown
 ---
@@ -351,7 +351,7 @@ Install the GitHub CLI (above) and run `gh auth login`.
 Try a larger model: `ollama pull llama3.1`, then set it in Settings. Small models (< 7B) sometimes struggle with strict JSON output.
 
 **Templates not showing**
-Ensure `GITY_TEMPLATE_DIR` points to a directory with `*.md` files that have YAML frontmatter. Default is `.github/ISSUE_TEMPLATES` relative to where you run gity.
+Ensure `INTAKE_TEMPLATE_DIR` points to a directory with `*.md` files that have YAML frontmatter. Default is `.github/ISSUE_TEMPLATES` relative to where you run intake.
 
 **Sound not working on Linux**
 Install `pulseaudio-utils` (`paplay`) or `alsa-utils` (`aplay`). Or toggle Sound off in Settings.
@@ -362,12 +362,12 @@ Install `pulseaudio-utils` (`paplay`) or `alsa-utils` (`aplay`). Or toggle Sound
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `GITY_REPO` | *(unset)* | Target GitHub repo, e.g. `owner/repo` |
-| `GITY_MODEL` | `llama3` | Ollama model |
+| `INTAKE_REPO` | *(unset)* | Target GitHub repo, e.g. `owner/repo` |
+| `INTAKE_MODEL` | `llama3` | Ollama model |
 | `OLLAMA_HOST` | `http://localhost:11434` | Ollama daemon URL |
-| `GITY_TIMEOUT` | `120` | Request timeout in seconds |
-| `GITY_MAX_TURNS` | `6` | Max agent Q&A rounds |
-| `GITY_TEMPLATE_DIR` | `.github/ISSUE_TEMPLATES` | Template directory |
-| `GITY_DEBUG` | *(unset)* | Set to `1` to log raw model output |
+| `INTAKE_TIMEOUT` | `120` | Request timeout in seconds |
+| `INTAKE_MAX_TURNS` | `6` | Max agent Q&A rounds |
+| `INTAKE_TEMPLATE_DIR` | `.github/ISSUE_TEMPLATES` | Template directory |
+| `INTAKE_DEBUG` | *(unset)* | Set to `1` to log raw model output |
 | `NO_COLOR` | *(unset)* | Disable ANSI colors |
-| `GITY_CONFIG` | `~/.config/gity/config.json` | Override config file path |
+| `INTAKE_CONFIG` | `~/.config/intake/config.json` | Override config file path |

@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tinydarkforge/gity/types"
+	"github.com/tinydarkforge/intake/types"
 )
 
 type GitHub struct {
@@ -104,7 +104,7 @@ func (g *GitHub) Create(ctx context.Context, draft types.Draft) (string, error) 
 	if strings.TrimSpace(draft.Title) == "" {
 		return "", errors.New("empty title")
 	}
-	f, err := os.CreateTemp("", "gity-body-*.md")
+	f, err := os.CreateTemp("", "intake-body-*.md")
 	if err != nil {
 		return "", err
 	}
@@ -167,7 +167,7 @@ func (g *GitHub) AssignMe(ctx context.Context, number int) error {
 
 // EditIssue updates the title and/or body of an existing issue.
 func (g *GitHub) EditIssue(ctx context.Context, number int, title, body string) error {
-	f, err := os.CreateTemp("", "gity-edit-*.md")
+	f, err := os.CreateTemp("", "intake-edit-*.md")
 	if err != nil {
 		return err
 	}

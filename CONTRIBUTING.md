@@ -1,19 +1,19 @@
-# Contributing to gity
+# Contributing to intake
 
-Thanks for your interest in improving gity. This document covers the contribution workflow.
+Thanks for your interest in improving intake. This document covers the contribution workflow.
 
 ## Before you start
 
-- Search [existing issues](https://github.com/tinydarkforge/Gity/issues) to avoid duplicates.
+- Search [existing issues](https://github.com/tinydarkforge/Intake/issues) to avoid duplicates.
 - For non-trivial changes, open an issue first to discuss scope.
 - Security issues → see [SECURITY.md](SECURITY.md), do not open a public issue.
 
 ## Development setup
 
 ```bash
-git clone https://github.com/tinydarkforge/Gity.git
-cd Gity
-go build -o gity .
+git clone https://github.com/tinydarkforge/Intake.git
+cd Intake
+go build -o intake .
 go test ./...
 ```
 
@@ -29,7 +29,7 @@ ollama serve
 Run against a scratch repo:
 
 ```bash
-./gity -repo your-user/sandbox-repo
+./intake -repo your-user/sandbox-repo
 ```
 
 ## Pull request workflow
@@ -40,7 +40,7 @@ Run against a scratch repo:
    ```bash
    go vet ./...
    go test ./...
-   go build -o /tmp/gity-check .
+   go build -o /tmp/intake-check .
    ```
 4. Commit using [Conventional Commits](https://www.conventionalcommits.org/):
    - `feat: add template caching`

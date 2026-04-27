@@ -5,12 +5,12 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/tinydarkforge/gity/app"
+	"github.com/tinydarkforge/intake/app"
 )
 
-// Header renders a one-line banner: "gity  ·  repo/name  ·  model  [status]"
+// Header renders a one-line banner: "intake  ·  repo/name  ·  model  [status]"
 func Header(width int, repo, model, status string) string {
-	left := app.StyleHeader.Render(fmt.Sprintf(" gity  ·  %s  ·  %s ", repo, model))
+	left := app.StyleHeader.Render(fmt.Sprintf(" intake  ·  %s  ·  %s ", repo, model))
 	right := ""
 	if status != "" {
 		right = app.StyleHeader.Render(fmt.Sprintf(" %s ", status))

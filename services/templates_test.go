@@ -3,7 +3,7 @@ package services_test
 import (
 	"testing"
 
-	"github.com/tinydarkforge/gity/services"
+	"github.com/tinydarkforge/intake/services"
 )
 
 func TestLoadTemplates(t *testing.T) {

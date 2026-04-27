@@ -9,7 +9,7 @@ Only the latest tagged release receives security fixes.
 Do **not** open a public issue for security reports.
 
 Report privately via GitHub's "Report a vulnerability" button in the
-[Security tab](https://github.com/tinydarkforge/gity/security/advisories/new),
+[Security tab](https://github.com/tinydarkforge/intake/security/advisories/new),
 or email `security@tinydarkforge.dev`.
 
 Please include:
@@ -26,7 +26,7 @@ under a 90-day disclosure window unless the issue is actively exploited.
 
 In scope:
 
-- `gity` binary and source
+- `intake` binary and source
 - Issue template parsing, Ollama prompt injection, `gh` invocation paths
 - Config file handling
 

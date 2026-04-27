@@ -6,7 +6,7 @@ import (
 	"github.com/charmbracelet/bubbles/viewport"
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/tinydarkforge/gity/app"
+	"github.com/tinydarkforge/intake/app"
 )
 
 // StreamPane is a scrollable viewport that accumulates streamed tokens.

@@ -1,15 +1,15 @@
 version: 2
 
-project_name: gity
+project_name: intake
 
 before:
   hooks:
     - go mod tidy
 
 builds:
-  - id: gity
+  - id: intake
     main: .
-    binary: gity
+    binary: intake
     env:
       - CGO_ENABLED=0
     goos:
@@ -27,7 +27,7 @@ builds:
       - -X main.date={{.Date}}
 
 archives:
-  - id: gity
+  - id: intake
     name_template: >-
       {{ .ProjectName }}_{{ .Version }}_
       {{- if eq .Os "darwin" }}macos{{ else }}{{ .Os }}{{ end }}_
@@ -60,11 +60,11 @@ changelog:
 release:
   github:
     owner: tinydarkforge
-    name: Gity
+    name: intake
   draft: false
   prerelease: auto
   mode: replace
   header: |
-    ## gity {{ .Tag }}
+    ## intake {{ .Tag }}
 
-    See [CHANGELOG.md](https://github.com/tinydarkforge/Gity/blob/main/CHANGELOG.md) for full notes.
+    See [CHANGELOG.md](https://github.com/tinydarkforge/intake/blob/main/CHANGELOG.md) for full notes.

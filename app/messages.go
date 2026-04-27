@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/tinydarkforge/gity/types"
+	"github.com/tinydarkforge/intake/types"
 )
 
 // ---- Navigation ----

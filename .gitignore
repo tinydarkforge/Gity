@@ -1,6 +1,6 @@
 # Binaries
-/gity
-gity.exe
+/intake
+intake.exe
 *.exe
 *.out
 *.test

@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tinydarkforge/gity/internal/jsonx"
+	"github.com/tinydarkforge/intake/internal/jsonx"
 )
 
 type OllamaClient struct {

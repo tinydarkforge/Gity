@@ -3,7 +3,7 @@ package components
 import (
 	"strings"
 
-	"github.com/tinydarkforge/gity/app"
+	"github.com/tinydarkforge/intake/app"
 )
 
 var tabLabels = []string{"Tasks", "Create", "Settings"}

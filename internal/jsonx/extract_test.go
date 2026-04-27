@@ -3,7 +3,7 @@ package jsonx_test
 import (
 	"testing"
 
-	"github.com/tinydarkforge/gity/internal/jsonx"
+	"github.com/tinydarkforge/intake/internal/jsonx"
 )
 
 type result struct {

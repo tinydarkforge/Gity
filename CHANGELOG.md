@@ -19,8 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Auto-applies template labels on issue creation
 - Full issue CRUD: create, edit, comment, assign, close, reopen
 - Multi-step create flow: template → title → context → agent Q&A → preview
-- Configurable via settings screen, env vars (`GITY_*`), or CLI flags
-- Config persisted at `~/.config/gity/config.json`
+- Configurable via settings screen, env vars (`INTAKE_*`), or CLI flags
+- Config persisted at `~/.config/intake/config.json`
 - Optional audio feedback on macOS / Linux
 - Debug mode dumping raw model output to stderr
 - GitHub Actions CI: `go build` + `go test` + `go vet` on macOS and Ubuntu
@@ -28,5 +28,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Security disclosure policy
 - Contributor guidelines and Code of Conduct
 
-[Unreleased]: https://github.com/tinydarkforge/Gity/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/tinydarkforge/Gity/releases/tag/v0.1.0
+[Unreleased]: https://github.com/tinydarkforge/Intake/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/tinydarkforge/Intake/releases/tag/v0.1.0

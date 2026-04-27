@@ -9,7 +9,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/tinydarkforge/gity/types"
+	"github.com/tinydarkforge/intake/types"
 )
 
 // LoadTemplates reads every *.md file in dir and parses YAML frontmatter.

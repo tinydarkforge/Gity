@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/tinydarkforge/gity/types"
+	"github.com/tinydarkforge/intake/types"
 )
 
 // Agent runs the multi-turn issue-drafting conversation with Ollama.
@@ -22,7 +22,7 @@ type Agent struct {
 	Debug    bool
 }
 
-const systemInstructions = `You are gity, an agent that drafts GitHub issues from whatever the user provides.
+const systemInstructions = `You are intake, an agent that drafts GitHub issues from whatever the user provides.
 
 The user may give you:
 - A polished one-liner title + brief description

@@ -3,7 +3,7 @@ package services_test
 import (
 	"testing"
 
-	"github.com/tinydarkforge/gity/types"
+	"github.com/tinydarkforge/intake/types"
 )
 
 // agentResponse helpers — unit-test the AgentResponse.IsReady logic without

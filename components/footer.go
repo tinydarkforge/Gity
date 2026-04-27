@@ -5,7 +5,7 @@ import (
 
 	"github.com/charmbracelet/bubbles/key"
 
-	"github.com/tinydarkforge/gity/app"
+	"github.com/tinydarkforge/intake/app"
 )
 
 // FooterHint renders a row of key hint pairs: "key  desc  key  desc …"

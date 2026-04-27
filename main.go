@@ -8,10 +8,10 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/tinydarkforge/gity/app"
-	"github.com/tinydarkforge/gity/services"
-	"github.com/tinydarkforge/gity/types"
-	"github.com/tinydarkforge/gity/ui"
+	"github.com/tinydarkforge/intake/app"
+	"github.com/tinydarkforge/intake/services"
+	"github.com/tinydarkforge/intake/types"
+	"github.com/tinydarkforge/intake/ui"
 )
 
 func main() {
@@ -23,10 +23,10 @@ func main() {
 		flagDebug   = flag.Bool("debug", false, "Debug mode")
 	)
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, "gity — agentic GitHub issue creator")
-		fmt.Fprintln(os.Stderr, "Usage: gity [flags]")
+		fmt.Fprintln(os.Stderr, "intake — agentic GitHub issue creator")
+		fmt.Fprintln(os.Stderr, "Usage: intake [flags]")
 		flag.PrintDefaults()
-		fmt.Fprintln(os.Stderr, "\nEnv vars: GITY_REPO, GITY_MODEL, OLLAMA_HOST, GITY_TIMEOUT, GITY_MAX_TURNS, GITY_TEMPLATE_DIR, GITY_DEBUG")
+		fmt.Fprintln(os.Stderr, "\nEnv vars: INTAKE_REPO, INTAKE_MODEL, OLLAMA_HOST, INTAKE_TIMEOUT, INTAKE_MAX_TURNS, INTAKE_TEMPLATE_DIR, INTAKE_DEBUG")
 	}
 	flag.Parse()
 
@@ -87,7 +87,7 @@ func main() {
 	root.Create = &createModel
 
 	if _, err := p.Run(); err != nil {
-		fmt.Fprintf(os.Stderr, "gity: %v\n", err)
+		fmt.Fprintf(os.Stderr, "intake: %v\n", err)
 		os.Exit(1)
 	}
 }

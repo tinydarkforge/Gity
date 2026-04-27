@@ -8,9 +8,9 @@ import (
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/tinydarkforge/gity/app"
-	"github.com/tinydarkforge/gity/components"
-	"github.com/tinydarkforge/gity/types"
+	"github.com/tinydarkforge/intake/app"
+	"github.com/tinydarkforge/intake/components"
+	"github.com/tinydarkforge/intake/types"
 )
 
 type settingsField int

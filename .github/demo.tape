@@ -3,7 +3,7 @@
 # Install vhs:  brew install vhs
 # Record:       vhs .github/demo.tape
 #
-# Pre-req: ollama running, GITY_REPO set to a sandbox repo with ~5 open issues.
+# Pre-req: ollama running, intake_REPO set to a sandbox repo with ~5 open issues.
 
 Output docs/demo.gif
 
@@ -14,7 +14,7 @@ Set Theme "Dracula"
 Set TypingSpeed 45ms
 Set PlaybackSpeed 1.0
 
-Type "gity"
+Type "intake"
 Enter
 Sleep 2s
 

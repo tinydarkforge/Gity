@@ -9,7 +9,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/tinydarkforge/gity/types"
+	"github.com/tinydarkforge/intake/types"
 )
 
 // Root is the top-level Bubble Tea model.  It owns screen routing and the NC
@@ -480,12 +480,12 @@ func (r Root) renderNCFrame() string {
 	return sb.String()
 }
 
-// renderTopBar renders the ╔...╗ / ║ gity ◆ repo ◆ model ║ top section.
+// renderTopBar renders the ╔...╗ / ║ intake ◆ repo ◆ model ║ top section.
 func (r Root) renderTopBar(W int) string {
 	bStyle := lipgloss.NewStyle().Foreground(NCBorder)
 	topBorder := bStyle.Render("╔" + strings.Repeat("═", W-2) + "╗")
 
-	title := fmt.Sprintf(" gity  %s  %s ", r.Cfg.Repo, r.Cfg.Model)
+	title := fmt.Sprintf(" intake  %s  %s ", r.Cfg.Repo, r.Cfg.Model)
 	tw := lipgloss.Width(title)
 	if tw < W-2 {
 		title = title + strings.Repeat(" ", W-2-tw)

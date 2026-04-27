@@ -1,4 +1,4 @@
-module github.com/tinydarkforge/gity
+module github.com/tinydarkforge/intake
 
 go 1.26.2
 

@@ -34,7 +34,7 @@ func DefaultConfig() Config {
 }
 
 func ConfigPath() (string, error) {
-	if p := os.Getenv("GITY_CONFIG"); p != "" {
+	if p := os.Getenv("INTAKE_CONFIG"); p != "" {
 		return p, nil
 	}
 	base := os.Getenv("XDG_CONFIG_HOME")
@@ -45,7 +45,7 @@ func ConfigPath() (string, error) {
 		}
 		base = filepath.Join(home, ".config")
 	}
-	return filepath.Join(base, "gity", "config.json"), nil
+	return filepath.Join(base, "intake", "config.json"), nil
 }
 
 func LoadConfig() (Config, error) {
@@ -83,29 +83,29 @@ func SaveConfig(cfg Config) error {
 }
 
 func applyEnv(cfg Config) Config {
-	if v := os.Getenv("GITY_REPO"); v != "" {
+	if v := os.Getenv("INTAKE_REPO"); v != "" {
 		cfg.Repo = v
 	}
-	if v := os.Getenv("GITY_MODEL"); v != "" {
+	if v := os.Getenv("INTAKE_MODEL"); v != "" {
 		cfg.Model = v
 	}
 	if v := os.Getenv("OLLAMA_HOST"); v != "" {
 		cfg.OllamaHost = v
 	}
-	if v := os.Getenv("GITY_TIMEOUT"); v != "" {
+	if v := os.Getenv("INTAKE_TIMEOUT"); v != "" {
 		if n, err := strconv.Atoi(v); err == nil {
 			cfg.TimeoutSec = n
 		}
 	}
-	if v := os.Getenv("GITY_MAX_TURNS"); v != "" {
+	if v := os.Getenv("INTAKE_MAX_TURNS"); v != "" {
 		if n, err := strconv.Atoi(v); err == nil {
 			cfg.MaxTurns = n
 		}
 	}
-	if v := os.Getenv("GITY_TEMPLATE_DIR"); v != "" {
+	if v := os.Getenv("INTAKE_TEMPLATE_DIR"); v != "" {
 		cfg.TemplateDir = v
 	}
-	if v := os.Getenv("GITY_DEBUG"); v == "1" || v == "true" {
+	if v := os.Getenv("INTAKE_DEBUG"); v == "1" || v == "true" {
 		cfg.Debug = true
 	}
 	return cfg
