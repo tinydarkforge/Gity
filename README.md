@@ -105,7 +105,16 @@ go install github.com/tinydarkforge/intake@latest
 git clone https://github.com/tinydarkforge/intake.git
 cd intake
 go build -o intake .
-mv intake /usr/local/bin/
+sudo mv intake /usr/local/bin/
+```
+
+### Make sure /usr/local/bin is in $PATH:
+```
+echo $PATH
+```
+If not:
+```
+export PATH="/usr/local/bin:$PATH"
 ```
 
 ---
