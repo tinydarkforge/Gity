@@ -1,11 +1,11 @@
 <!-- markdownlint-disable MD033 MD041 -->
 
 ```text
-         ╔═══╗           █████   █████   █████   █   █
-    ╔════╩═══╩════╗      █         █       █     █   █
-    ║  ─────────  ║      █ ███     █       █      █ █ 
-    ╠═════════════╣      █   █     █       █       █  
-    ║ q w e r t y ║      █████   █████     █       █  
+         ╔═══╗           █████ █   █ █████  ███  █   █ █████
+    ╔════╩═══╩════╗        █   ██  █   █   █   █ █  █  █    
+    ║  ─────────  ║        █   █ █ █   █   █████ ███   ████ 
+    ╠═════════════╣        █   █  ██   █   █   █ █  █  █    
+    ║ q w e r t y ║      █████ █   █   █   █   █ █   █ █████
     ║   a s d f   ║
     ╠═════════════╣      ━━━━━━━━━━━━━ ISSUE FORGE ━━━━━━━━━━━━━
     ║ [  space  ] ║      Ollama · GitHub CLI · Bubble Tea
@@ -22,7 +22,7 @@
   <a href="SECURITY.md"><img alt="security" src="https://img.shields.io/badge/security-policy-00cc66.svg?style=flat-square&labelColor=0a0a0a"></a>
 </p>
 
-> **intake** is a terminal UI for GitHub issues powered by a local AI agent. Paste anything — a Slack message, an error log, meeting notes, a stack trace — and intake drafts a structured GitHub issue using a local Ollama model. No cloud. No account. No telemetry.
+> **Intake** is a terminal UI for GitHub issues powered by a local AI agent. Paste anything — a Slack message, an error log, meeting notes, a stack trace — and intake drafts a structured GitHub issue using a local Ollama model. No cloud. No account. No telemetry.
 
 > **Status:** Early release (`v0.1.0`). MIT-licensed. macOS and Linux. Report vulnerabilities via [SECURITY.md](SECURITY.md).
 
