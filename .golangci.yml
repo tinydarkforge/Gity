@@ -3,7 +3,7 @@ linters:
     - errcheck
     - govet
     - staticcheck
-    - unused
+    - deadcode
 
 linters-settings:
   errcheck:

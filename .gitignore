@@ -27,6 +27,7 @@ Thumbs.db
 # Claude / tooling state
 .claude/settings.local.json
 .lucen/
+.a5c/
 
 # Local config
 .env
