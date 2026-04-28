@@ -37,6 +37,8 @@ func New() Root {
 	return Root{screen: ScreenNC, activePane: 1}
 }
 
+func (r Root) ActiveScreen() Screen { return r.screen }
+
 func (r Root) Init() tea.Cmd {
 	var cmds []tea.Cmd
 	for _, m := range []tea.Model{r.Local, r.List, r.Create, r.Detail, r.Settings} {

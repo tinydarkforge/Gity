@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
@@ -21,6 +22,9 @@ type OllamaClient struct {
 }
 
 func NewOllama(host, model string, timeout time.Duration) *OllamaClient {
+	if !strings.Contains(host, "localhost") && !strings.Contains(host, "127.0.0.1") {
+		fmt.Fprintln(os.Stderr, "warning: ollama host is remote — TLS not verified")
+	}
 	return &OllamaClient{
 		Host:    host,
 		Model:   model,
