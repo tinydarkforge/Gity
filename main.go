@@ -14,8 +14,15 @@ import (
 	"github.com/tinydarkforge/intake/ui"
 )
 
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
 func main() {
 	var (
+		flagVersion = flag.Bool("version", false, "print version")
 		flagRepo    = flag.String("repo", "", "GitHub repo (owner/name)")
 		flagModel   = flag.String("model", "", "Ollama model")
 		flagHost    = flag.String("ollama-host", "", "Ollama host URL")
@@ -29,6 +36,11 @@ func main() {
 		fmt.Fprintln(os.Stderr, "\nEnv vars: INTAKE_REPO, INTAKE_MODEL, OLLAMA_HOST, INTAKE_TIMEOUT, INTAKE_MAX_TURNS, INTAKE_TEMPLATE_DIR, INTAKE_DEBUG")
 	}
 	flag.Parse()
+
+	if *flagVersion {
+		fmt.Printf("intake %s (%s) %s\n", version, commit, date)
+		os.Exit(0)
+	}
 
 	cfg, err := types.LoadConfig()
 	if err != nil {
