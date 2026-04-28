@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
+	"regexp"
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -18,6 +20,8 @@ var (
 	version = "dev"
 	commit  = "none"
 	date    = "unknown"
+
+	repoRe = regexp.MustCompile(`^[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+$`)
 )
 
 func main() {
@@ -64,9 +68,22 @@ func main() {
 		cfg.Debug = true
 	}
 
+	if cfg.Repo != "" && !repoRe.MatchString(cfg.Repo) {
+		fmt.Fprintf(os.Stderr, "intake: invalid repo %q — expected owner/name\n", cfg.Repo)
+		os.Exit(1)
+	}
+
 	// Build services.
 	gh := services.NewGitHub(cfg.Repo)
 	ollama := services.NewOllama(cfg.OllamaHost, cfg.Model, time.Duration(cfg.TimeoutSec)*time.Second)
+
+	{
+		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+		defer cancel()
+		if err := ollama.Ping(ctx); err != nil {
+			fmt.Fprintln(os.Stderr, "warning: ollama unreachable — create flow will fail until ollama is running")
+		}
+	}
 
 	tmpls, err := services.LoadTemplates(cfg.TemplateDir)
 	if err != nil || len(tmpls) == 0 {
