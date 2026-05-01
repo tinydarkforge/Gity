@@ -38,7 +38,7 @@ Two-pane TUI: browse your filesystem left, manage GitHub issues right. Press `c`
 
 ---
 
-## ░▒▓█ Easy install (no dev experience needed)
+## ░▒▓█ Installation script
 
 One command. Installs Ollama, GitHub CLI, the intake binary, pulls the AI model, signs you in, and asks which repo to use.
 
