@@ -97,7 +97,7 @@ intake is **not** a project management tool, a GitHub web app replacement, or a 
 | [GitHub CLI (`gh`)](https://cli.github.com) | Creates / lists issues | 2.x |
 | [Go](https://go.dev/dl/) | Build from source only | 1.26+ |
 
-**Platforms:** macOS (Intel + Apple Silicon), Linux (x86\_64 + arm64). Pre-built binaries on the [releases page](https://github.com/tinydarkforge/Intake/releases/latest). No Windows binary — build from source if needed.
+**Platforms:** macOS (Intel + Apple Silicon), Linux (x86\_64 + arm64), Windows (x86\_64 + arm64, untested). Pre-built binaries on the [releases page](https://github.com/tinydarkforge/Intake/releases/latest). The guided installer (`install.sh`) covers macOS and Linux only; Windows users should download the zip from releases.
 
 ---
 
