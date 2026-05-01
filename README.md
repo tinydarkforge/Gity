@@ -103,7 +103,7 @@ intake is **not** a project management tool, a GitHub web app replacement, or a 
 
 ## ░▒▓█ Manual install (advanced)
 
-> Most users should use the [Easy install](#easy-install-no-dev-experience-needed) above. The steps below are for anyone who wants control over each piece.
+> Most users should use the [Installation script](#-installation-script) above. The steps below are for anyone who wants control over each piece.
 
 ### Pre-built binary
 

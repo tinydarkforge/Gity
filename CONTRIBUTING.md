@@ -17,7 +17,7 @@ go build -o intake .
 go test ./...
 ```
 
-Requirements: Go 1.22+, [Ollama](https://ollama.ai), [GitHub CLI](https://cli.github.com).
+Requirements: Go 1.26+, [Ollama](https://ollama.ai), [GitHub CLI](https://cli.github.com).
 
 Pull a model for local testing:
 
