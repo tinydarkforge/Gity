@@ -172,26 +172,42 @@ fi
 
 # ---------- intake binary ----------
 step "Installing intake"
-LATEST_TAG="$(curl -fsSL https://api.github.com/repos/tinydarkforge/Intake/releases/latest \
-  | grep -oE '"tag_name":\s*"[^"]+"' | head -1 | sed -E 's/.*"([^"]+)"/\1/')"
-if [[ -z "$LATEST_TAG" ]]; then
-  err "Could not fetch latest release tag from GitHub. Check your internet connection."
+RELEASE_JSON="$(curl -fsSL https://api.github.com/repos/tinydarkforge/Intake/releases/latest)" || {
+  err "Could not reach GitHub API. Check your internet connection."
+  exit 1
+}
+LATEST_TAG="$(printf '%s' "$RELEASE_JSON" | grep -oE '"tag_name":\s*"[^"]+"' | head -1 | sed -E 's/.*"([^"]+)"/\1/')"
+[[ -z "$LATEST_TAG" ]] && { err "Could not parse latest release tag."; exit 1; }
+
+# match any asset whose name ends with _<OS>_<ARCH>.tar.gz — survives project renames
+ASSET_URL="$(printf '%s' "$RELEASE_JSON" \
+  | grep -oE '"browser_download_url":\s*"[^"]+\.tar\.gz"' \
+  | sed -E 's/.*"([^"]+)"/\1/' \
+  | grep -E "_${OS}_${ARCH}\.tar\.gz$" \
+  | head -1)"
+if [[ -z "$ASSET_URL" ]]; then
+  err "No release asset found for ${OS}/${ARCH} in $LATEST_TAG."
+  err "Check the releases page: https://github.com/tinydarkforge/Intake/releases"
   exit 1
 fi
-VERSION="${LATEST_TAG#v}"
-TARBALL="intake_${VERSION}_${OS}_${ARCH}.tar.gz"
-URL="https://github.com/tinydarkforge/Intake/releases/download/${LATEST_TAG}/${TARBALL}"
+TARBALL="$(basename "$ASSET_URL")"
 TMPDIR="$(mktemp -d)"
 trap 'rm -rf "$TMPDIR"' EXIT
 
 ok "fetching $LATEST_TAG → $TARBALL"
-curl -fsSL "$URL" -o "$TMPDIR/$TARBALL" || {
-  err "download failed: $URL"
-  err "Check the releases page: https://github.com/tinydarkforge/Intake/releases"
+curl -fsSL "$ASSET_URL" -o "$TMPDIR/$TARBALL" || {
+  err "download failed: $ASSET_URL"
   exit 1
 }
 tar -xzf "$TMPDIR/$TARBALL" -C "$TMPDIR"
-$SUDO install -m 0755 "$TMPDIR/intake" "$BIN_DIR/intake"
+
+# binary inside tarball may be 'intake' or legacy 'gity'
+BIN_SRC=""
+for candidate in intake gity; do
+  if [[ -f "$TMPDIR/$candidate" ]]; then BIN_SRC="$TMPDIR/$candidate"; break; fi
+done
+[[ -z "$BIN_SRC" ]] && { err "No intake/gity binary found inside $TARBALL"; exit 1; }
+$SUDO install -m 0755 "$BIN_SRC" "$BIN_DIR/intake"
 ok "intake installed → $BIN_DIR/intake"
 
 # PATH check
