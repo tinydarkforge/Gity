@@ -38,6 +38,28 @@ Two-pane TUI: browse your filesystem left, manage GitHub issues right. Press `c`
 
 ---
 
+## ░▒▓█ Easy install (no dev experience needed)
+
+One command. Installs Ollama, GitHub CLI, the intake binary, pulls the AI model, signs you in, and asks which repo to use.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/tinydarkforge/Intake/main/scripts/install.sh | bash
+```
+
+What it does, in plain English:
+
+1. Checks if you have **Ollama** (the local AI). Installs it if not.
+2. Checks if you have **GitHub CLI** (`gh`). Installs it if not, then signs you in.
+3. Downloads the **intake** app for your computer (macOS or Linux).
+4. Pulls a default AI model (`llama3`, ~4.7 GB — first time only).
+5. Asks which GitHub repo to point intake at, and saves it.
+
+When it finishes, type `intake` and press Enter.
+
+> Re-running the script is safe — every step skips itself if already done.
+
+---
+
 ## ░▒▓█ What it does today
 
 intake wraps two things: a **Norton Commander-style filesystem + issues browser** and an **agentic issue drafter** powered by Ollama.
@@ -79,16 +101,18 @@ intake is **not** a project management tool, a GitHub web app replacement, or a 
 
 ---
 
-## ░▒▓█ Install
+## ░▒▓█ Manual install (advanced)
 
-### Pre-built binary (recommended)
+> Most users should use the [Easy install](#easy-install-no-dev-experience-needed) above. The steps below are for anyone who wants control over each piece.
+
+### Pre-built binary
 
 Grab the tarball for your platform from the [latest release](https://github.com/tinydarkforge/Intake/releases/latest), extract, and move the binary onto your `$PATH`:
 
 ```bash
 # example — macOS Apple Silicon
-tar xz intake < intake_*_macos_arm64.tar.gz
-mv intake /usr/local/bin/
+tar -xzf intake_*_macos_arm64.tar.gz
+sudo mv intake /usr/local/bin/
 ```
 
 Builds are provided for `macos_arm64`, `macos_x86_64`, `linux_arm64`, and `linux_x86_64`.
@@ -108,13 +132,11 @@ go build -o intake .
 sudo mv intake /usr/local/bin/
 ```
 
-### Make sure /usr/local/bin is in $PATH:
-```
-echo $PATH
-```
-If not:
-```
-export PATH="/usr/local/bin:$PATH"
+### Confirm `/usr/local/bin` is on your `$PATH`
+
+```bash
+echo "$PATH" | tr ':' '\n' | grep -x /usr/local/bin || \
+  echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
 ```
 
 ---
